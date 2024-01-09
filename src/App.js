@@ -32,7 +32,7 @@ const LoginForm = () => {
             required
           />
         </label>
-        <button type="submit">Login</button>
+        <button type="submit">Connecte</button>
       </form>
     </div>
   );
@@ -42,7 +42,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Login Form</h1>
+        <h1>Bienvenue sur VaikaNet</h1>
         <LoginForm />
       </header>
     </div>
