@@ -46,8 +46,14 @@ button {
   cursor: pointer;
   width: 100%;
   transition: background-color 0.3s ease;
+  margin-left: 13px;
+  margin-bottom: 10%;
 }
 
 button:hover {
-  background-color: #0056b3; /* Bleu foncé au survol */
+  background-color: #004976; /* Bleu foncé au survol */
+}
+
+img{
+  width: 50%;
 }

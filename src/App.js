@@ -13,9 +13,10 @@ const LoginForm = () => {
 
   return (
     <div className="login-container">
+      <img src='%PUBLIC_URL%/../assets/images/logo/logo_trial rgba(a0).png'></img>
       <form className="login-form" onSubmit={handleLogin}>
         <label>
-          Username:
+          Nom:
           <input
             type="text"
             value={username}
@@ -24,7 +25,7 @@ const LoginForm = () => {
           />
         </label>
         <label>
-          Password:
+          Mot de passe:
           <input
             type="password"
             value={password}
@@ -32,7 +33,9 @@ const LoginForm = () => {
             required
           />
         </label>
-        <button type="submit">Connecte</button>
+        <center>
+        <button>Connecte</button>
+        </center>
       </form>
     </div>
   );
@@ -42,8 +45,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Bienvenue sur VaikaNet</h1>
+      <center>
         <LoginForm />
+      </center>
       </header>
     </div>
   );
