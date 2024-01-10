@@ -13,7 +13,7 @@ const LoginForm = () => {
 
   return (
     <div className="login-container">
-      <img src='%PUBLIC_URL%/../assets/images/logo/logo_trial rgba(a0).png'></img>
+      <img src='%PUBLIC_URL%/../assets/images/logo/logo_trial rgba(a0).png' alt='logo du VaikaNet'></img>
       <form className="login-form" onSubmit={handleLogin}>
         <label>
           Nom:
