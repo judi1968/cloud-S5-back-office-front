@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState(null);
 
@@ -10,12 +10,12 @@ const LoginForm = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/log_admin_traitement', {
+      const response = await fetch('http://localhost:2024/log_admin_traitement', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({name: name,password: password }),
       });
 
       if (response.ok) {
@@ -42,8 +42,8 @@ const LoginForm = () => {
           <input
             name='name'
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </label>
@@ -58,7 +58,7 @@ const LoginForm = () => {
           />
         </label>
         <center>
-          <button type="submit">{loginStatus === 'success' ? 'Connexion réussie' : loginStatus === 'failure' ? 'Connexion échouée' : 'Connecter'}</button>
+          <button type="submit" >{loginStatus === 'success' ? 'Connexion réussie' : loginStatus === 'failure' ? 'Connexion échouée' : 'Connecter'}</button>
         </center>
       </form>
     </div>
