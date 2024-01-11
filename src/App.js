@@ -5,7 +5,7 @@ import './App.css';
 const LoginForm = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [loginStatus, setLoginStatus] = useState(null);
+  const [loginStatus ] = useState(null);
 
   return (
     <div className={`login-container ${loginStatus === 'success' ? 'success' : loginStatus === 'failure' ? 'failure' : ''}`}>
