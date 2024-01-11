@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './App.css';
 
 const LoginForm = () => {
@@ -6,37 +7,10 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState(null);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    
-    try {
-      const response = await fetch('http://localhost:2024/log_admin_traitement', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({name: name,password: password }),
-      });
-
-      if (response.ok) {
-        console.log('Connexion réussie!');
-        setLoginStatus('success');
-        // Ajoutez ici la logique après une connexion réussie
-      } else {
-        console.error('Échec de la connexion. Vérifiez vos informations.');
-        setLoginStatus('failure');
-        // Ajoutez ici la logique après une connexion échouée
-      }
-    } catch (error) {
-      console.error('Erreur lors de la connexion:', error);
-      setLoginStatus('failure');
-    }
-  };
-
   return (
     <div className={`login-container ${loginStatus === 'success' ? 'success' : loginStatus === 'failure' ? 'failure' : ''}`}>
       <img src="%PUBLIC_URL%/../assets/images/logo/logo_trial rgba(a0).png" alt="logo du VaikaNet" />
-      <form className="login-form" onSubmit={handleLogin}>
+      <form className="login-form" action='https://cloud-s5-metier-production.up.railway.app' method='post'>
         <label>
           Nom:
           <input
