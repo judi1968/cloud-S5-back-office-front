@@ -4,12 +4,13 @@ import './App.css';
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loginStatus, setLoginStatus] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     
     try {
-      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/login_admin', {
+      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/log_admin_traitement', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -19,18 +20,21 @@ const LoginForm = () => {
 
       if (response.ok) {
         console.log('Connexion réussie!');
+        setLoginStatus('success');
         // Ajoutez ici la logique après une connexion réussie
       } else {
         console.error('Échec de la connexion. Vérifiez vos informations.');
+        setLoginStatus('failure');
         // Ajoutez ici la logique après une connexion échouée
       }
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
+      setLoginStatus('failure');
     }
   };
 
   return (
-    <div className="login-container">
+    <div className={`login-container ${loginStatus === 'success' ? 'success' : loginStatus === 'failure' ? 'failure' : ''}`}>
       <img src="%PUBLIC_URL%/../assets/images/logo/logo_trial rgba(a0).png" alt="logo du VaikaNet" />
       <form className="login-form" onSubmit={handleLogin}>
         <label>
@@ -54,7 +58,7 @@ const LoginForm = () => {
           />
         </label>
         <center>
-          <button type="submit">Connecter</button>
+          <button type="submit">{loginStatus === 'success' ? 'Connexion réussie' : loginStatus === 'failure' ? 'Connexion échouée' : 'Connecter'}</button>
         </center>
       </form>
     </div>
