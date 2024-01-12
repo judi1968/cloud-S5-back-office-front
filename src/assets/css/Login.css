@@ -1,0 +1,59 @@
+.App {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ffffff; /* Couleur de fond gris clair */
+  }
+  
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* Fond blanc */
+  }
+  
+  .login-form {
+    width: 100%;
+    max-width: 300px; /* Largeur maximale du formulaire */
+    padding-right: 15px;
+  }
+  
+  label {
+    margin-bottom: 8px;
+    color: #333; /* Couleur du texte des étiquettes */
+    font-weight: bold;
+  }
+  
+  input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  button {
+    background-color: #007bff; /* Bleu primaire */
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10%;
+  }
+  
+  button:hover {
+    background-color: #004976; /* Bleu foncé au survol */
+  }
+  
+  img{
+    width: 50%;
+  }
+  

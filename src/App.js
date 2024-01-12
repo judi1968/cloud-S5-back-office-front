@@ -1,52 +1,30 @@
-import React, { useState } from 'react';
-import './App.css';
-
-const LoginForm = () => {
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginStatus ] = useState(null);
-
-  return (
-    <div className={`login-container ${loginStatus === 'success' ? 'success' : loginStatus === 'failure' ? 'failure' : ''}`}>
-      <img src="%PUBLIC_URL%/../assets/images/logo/logo_trial rgba(a0).png" alt="logo du VaikaNet" />
-      <form className="login-form" action='https://cloud-s5-metier-production.up.railway.app' method='post'>
-        <label>
-          Nom:
-          <input
-            name='name'
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Mot de passe:
-          <input
-            name='password'
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <center>
-          <button type="submit" >{loginStatus === 'success' ? 'Connexion réussie' : loginStatus === 'failure' ? 'Connexion échouée' : 'Connecter'}</button>
-        </center>
-      </form>
-    </div>
-  );
-};
+import React from 'react';
+import { Route, Routes, BrowserRouter as Router, NavLink } from 'react-router-dom';
+import Login from './pages/Login';
+import Home from './pages/Home';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <center>
-          <LoginForm />
-        </center>
-      </header>
-    </div>
+    <Router>
+      <div className='container mt-10'>
+        <header className="ml-24 shadow-md">
+          <nav className='flex justify-center'>
+          {window.location.pathname !== '/login' && (
+          <nav>
+            <NavLink to="/login">login</NavLink>
+            <NavLink to="/home">Accueil</NavLink>
+          </nav>
+        )}
+          </nav>
+        </header>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/home' element={<Home />} />
+          {/* <Route path='/novalide' element={<MouvementsNonValides />} /> */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
