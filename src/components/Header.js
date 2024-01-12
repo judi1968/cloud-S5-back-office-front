@@ -2,9 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Assurez-vous d'importer le CSS de Bootstrap dans votre projet
 import { NavLink } from 'react-router-dom';
 import "./../assets/css/Header.css"
-const style = {
-    color : 'red'
-};
+
 const Header = () => {
   return (
     <header className="container mt-12" class="header">
