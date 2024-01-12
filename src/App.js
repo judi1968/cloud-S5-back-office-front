@@ -8,16 +8,6 @@ function App() {
   return (
     <Router>
       <div className='container mt-10'>
-        <header className="ml-24 shadow-md">
-          <nav className='flex justify-center'>
-          {window.location.pathname !== '/login' && (
-          <nav>
-            <NavLink to="/login">login</NavLink>
-            <NavLink to="/home">Accueil</NavLink>
-          </nav>
-        )}
-          </nav>
-        </header>
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/home' element={<Home />} />
