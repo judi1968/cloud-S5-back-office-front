@@ -1,0 +1,24 @@
+.header{
+    margin-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 10px rgb(137, 136, 136);
+    border-radius: 5px;
+}
+
+.header a{
+    background-color: #017cff;
+    justify-content: center;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+}
+.header ul{
+    justify-content: flex-start;
+}
+.header li{
+    margin-left: 2%;
+}
+.header a{
+    background-color: #004976;
+}
