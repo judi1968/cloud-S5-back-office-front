@@ -12,7 +12,7 @@ const Header = () => {
                 <NavLink className="nav-link" to="/home">Tableau statistique</NavLink>
             </li>
             <li class="nav-item">
-                <NavLink className="nav-link" to="/home">Liste des annonces</NavLink>
+                <NavLink className="nav-link" to="/list_annonce">Liste des annonces</NavLink>
             </li>
             <li class="nav-item">
                 <NavLink className="nav-link" to="/home">Les elements necessaires</NavLink>
