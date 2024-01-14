@@ -15,7 +15,7 @@ const Header = () => {
                 <NavLink className="nav-link" to="/list_annonce">Liste des annonces</NavLink>
             </li>
             <li class="nav-item">
-                <NavLink className="nav-link" to="/home">Les elements necessaires</NavLink>
+                <NavLink className="nav-link" to="/element_necessaire">Les elements necessaires</NavLink>
             </li>
             <li class="nav-item">
                 <NavLink className="nav-link" to="/">Deconnection</NavLink>
