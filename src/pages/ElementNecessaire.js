@@ -60,11 +60,22 @@ const ElementNecessaire = () => {
     <header>
         <Header></Header>
     </header>
+    <div className='element-necessaire'>
       <h1>Elements Necessaires</h1>
         <div className='row min-header'>
-            <Button className='button-animation' variant="primary" onClick={handleAddClick}>
-                Ajouter
-            </Button>
+            <div className='col-6'>
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected>Element</option>
+                    <option value="1">Marque</option>
+                    <option value="2">Caracteristique</option>
+                    <option value="3">Carburant</option>
+                </select>
+            </div>
+            <div className='col-6'>
+                <Button className='button-animation button-animation-green' variant="primary" onClick={handleAddClick}>
+                    Ajouter
+                </Button>
+            </div>
         </div>
 
       <ul className="list-group mt-3">
@@ -72,10 +83,11 @@ const ElementNecessaire = () => {
           <li key={element.id} className="list-group-item d-flex justify-content-between align-items-center">
             {element.nom}
             <div>
-              <Button className='button-animation' variant="info" onClick={() => handleEditClick(element)}>
+              <Button className='button-animation ' variant="info" onClick={() => handleEditClick(element)}>
                 Modifier
               </Button>
-              <Button className='button-animation' variant="danger" onClick={() => handleDeleteClick(element)}>
+                <div><br></br></div>
+              <Button className='button-animation button-animation-red' variant="danger" onClick={() => handleDeleteClick(element)}>
                 Supprimer
               </Button>
             </div>
@@ -97,10 +109,11 @@ const ElementNecessaire = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button className='button-animation' variant="secondary" onClick={handleCloseModals}>
+          <Button className='button-animation button-animation-grey' variant="secondary" onClick={handleCloseModals}>
             Annuler
           </Button>
-          <Button className='button-animation' variant="primary" onClick={handleAddElement}>
+          <div><br></br></div>
+          <Button className='button-animation button-animation-green' variant="primary" onClick={handleAddElement}>
             Ajouter
           </Button>
         </Modal.Footer>
@@ -120,7 +133,7 @@ const ElementNecessaire = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button className='button-animation' variant="secondary" onClick={handleCloseModals}>
+          <Button className='button-animation button-animation-grey' variant="secondary" onClick={handleCloseModals}>
             Annuler
           </Button>
           <Button className='button-animation' variant="primary" onClick={handleEditElement}>
@@ -138,14 +151,15 @@ const ElementNecessaire = () => {
           Êtes-vous sûr de vouloir supprimer l'élément "{selectedElement?.nom}" ?
         </Modal.Body>
         <Modal.Footer>
-          <Button className='button-animation' variant="secondary" onClick={handleCloseModals}>
+          <Button className='button-animation button-animation-grey' variant="secondary" onClick={handleCloseModals}>
             Non
           </Button>
-          <Button className='button-animation' variant="danger" onClick={handleDeleteElement}>
+          <Button className='button-animation button-animation-red' variant="danger" onClick={handleDeleteElement}>
             Oui
           </Button>
         </Modal.Footer>
       </Modal>
+      </div>
     </div>
   );
 };
