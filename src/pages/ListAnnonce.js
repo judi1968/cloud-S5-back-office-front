@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';
+import Annonce from '../components/Annonce';
+import AnnonceDetail from '../components/AnnonceDetail';
 import './../assets/css/Home.css';
 import './../assets/css/statTables.css';
-import Annonce from '../components/Annonce';
 
 const ListAnnonce = () => {
+  const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const annoncesData = [
     {
       id: 1,
@@ -40,6 +42,31 @@ const ListAnnonce = () => {
     // Ajoutez autant d'annonces que nécessaire
   ];
 
+  const handleDetailClick = (annonce) => {
+    setSelectedAnnonce(annonce);
+  };
+  const handleFermerClick = () => {
+    setSelectedAnnonce(null);
+  };
+  const renderAnnonceList = (nombre) => {
+    return annoncesData.map((annonce) => (
+      <div key={annonce.id} className={`mb-${nombre} col-md-${nombre}`}>
+        <Annonce
+          titre={`Annonce ${annonce.id}`}
+          description={annonce.description}
+          date={annonce.date}
+          vendeur={annonce.vendeur}
+          marqueVoiture={annonce.marqueVoiture}
+          type={annonce.type}
+          prix={annonce.prix}
+          commissionPropose={annonce.commissionPropose}
+          onDetailClick={() => handleDetailClick(annonce)}
+        />
+      </div>
+    ));
+  };
+  
+
   return (
     <div className="container mt-12 grid-container">
       <header>
@@ -50,20 +77,22 @@ const ListAnnonce = () => {
         <div className="container mt-12 table-container">
           <h1>Liste des annonces de vente de voitures</h1>
           <div className='row'>
-            {annoncesData.map((annonce) => (
-              <div key={annonce.id} className="col-md-4 mb-4">
-                <Annonce
-                  titre={`Annonce ${annonce.id}`}
-                  description={annonce.description}
-                  date={annonce.date}
-                  vendeur={annonce.vendeur}
-                  marqueVoiture={annonce.marqueVoiture}
-                  type={annonce.type}
-                  prix={annonce.prix}
-                  commissionPropose={annonce.commissionPropose}
-                />
+            {selectedAnnonce ? (
+              // Si une annonce est sélectionnée, afficher les détails de l'annonce à droite
+              <>
+                <div className="col-md-4 mb-4">
+                  {renderAnnonceList(12)}
+                </div>
+                <div className="col-md-8">
+                  <AnnonceDetail annonce={selectedAnnonce} onFermerClick={handleFermerClick} />
+                </div>
+              </>
+            ) : (
+              // Si aucune annonce n'est sélectionnée, afficher simplement la liste des annonces
+              <div className="row d-flex flex-wrap col-12">
+                {renderAnnonceList(4)}
               </div>
-            ))}
+            )}
           </div>
         </div>
       </main>

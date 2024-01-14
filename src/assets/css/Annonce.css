@@ -1,7 +1,20 @@
 /* Annonce.css */
 
-.annonce-card {
+.animated-annonce-card {
     margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   .card {
@@ -28,3 +41,36 @@
     font-size: 0.9em;
   }
   
+  /* Ajout de l'animation similaire au nav-link */
+  .animated-annonce-card:hover .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .animated-annonce-card:hover .card-body {
+    background-color: #017cff;
+    color: white;
+    transition-duration: 0.5s;
+    border-radius: 5px;
+  }
+  
+  .animated-annonce-card:hover .card-title,
+  .animated-annonce-card:hover .card-text {
+    color: white;
+  }
+  .animated-annonce-card ul{
+    border-radius: 5px;
+}
+ .animated-annonce-card:hover ul li strong{
+     color: #017cff;
+     transition-duration: 0.5s;
+ }
+ .animated-annonce-card:hover button{
+    color: #017cff;
+    background-color: white;
+    transition-duration: 0.5s;
+}
+.animated-annonce-card button:hover{
+    color: white;
+    background-color: #004976;
+    transition-duration: 0.5s;
+}
