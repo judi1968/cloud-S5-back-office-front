@@ -9,17 +9,17 @@ const Header = () => {
         <div className="mt-12">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <NavLink className="nav-link" to="/home">login</NavLink>
-            </li>
-            {/*<li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#" tabindex="-1" aria-disabled="true"><NavLink to="/home">login</NavLink></a>
+                <NavLink className="nav-link" to="/home">les elements necessaires</NavLink>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#" tabindex="-1" aria-disabled="true"><NavLink to="/home">login</NavLink></a>
+                <NavLink className="nav-link" to="/home">Tableau statistique</NavLink>
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#"><NavLink to="/home">login</NavLink></a>
-            </li> */}
+                <NavLink className="nav-link" to="/home">Liste des annonces</NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink className="nav-link" to="/">Deconnection</NavLink>
+            </li>
         </ul>    
     </div>     
     </header>
