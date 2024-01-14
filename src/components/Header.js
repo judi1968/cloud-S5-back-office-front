@@ -8,10 +8,10 @@ const Header = () => {
     <header className="container mt-12" class="header">
         <div className="mt-12">
         <ul class="nav justify-content-center">
-            {/* <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#" tabindex="-1" aria-disabled="true"><NavLink to="/home">login</NavLink></a>
             </li>
-            <li class="nav-item">
+            {/*<li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#" tabindex="-1" aria-disabled="true"><NavLink to="/home">login</NavLink></a>
             </li>
             <li class="nav-item">
