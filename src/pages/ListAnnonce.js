@@ -17,7 +17,8 @@ const ListAnnonce = () => {
       type: 'SUV',
       prix: 35000,
       commissionPropose: 2000,
-      description: 'Audi SUV en excellent état à vendre.'
+      description: 'Audi SUV en excellent état à vendre.',
+      
     },
     {
       id: 2,
@@ -80,11 +81,11 @@ const ListAnnonce = () => {
             {selectedAnnonce ? (
               // Si une annonce est sélectionnée, afficher les détails de l'annonce à droite
               <>
-                <div className="col-md-4 mb-4">
-                  {renderAnnonceList(12)}
-                </div>
                 <div className="col-md-8">
                   <AnnonceDetail annonce={selectedAnnonce} onFermerClick={handleFermerClick} />
+                </div>
+                <div className="col-md-4 mb-4">
+                  {renderAnnonceList(12)}
                 </div>
               </>
             ) : (
