@@ -1,0 +1,34 @@
+
+.btn-action-list {
+    position: relative;
+    background-color: #017cff00;
+    color: #017cff;
+    border: 2px solid #017cff;
+    overflow: hidden;
+    width: 30%;
+    margin-left: 10px;
+}
+
+.btn-action-list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #017cff 0%, #017cff 50%, transparent 50%, transparent 100%);
+    background-size: 200% 100%;
+    transition: left 1s;
+}
+
+.btn-action-list:hover::before {
+    left: 100%;
+}
+
+.btn-action-list:hover {
+    background-color: #019eff;
+    color: white;
+    border-color: white;
+}
+
+

@@ -5,6 +5,7 @@ import Annonce from '../components/Annonce';
 import AnnonceDetail from '../components/AnnonceDetail';
 import './../assets/css/Home.css';
 import './../assets/css/statTables.css';
+import './../assets/css/ListAnnonce.css';
 
 const ListAnnonce = () => {
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
@@ -77,6 +78,12 @@ const ListAnnonce = () => {
       <main className="mt-12">
         <div className="container mt-12 table-container">
           <h1>Liste des annonces de vente de voitures</h1>
+          <div class="row">
+            <button  class="btn-action-list btn btn-primary">En attente de validation</button>
+            <button  class="btn-action-list btn btn-primary">Deja valider validation</button>
+            <button  class="btn-action-list btn btn-primary">Tout les annonces</button>
+          </div>
+          <br></br>
           <div className='row'>
             {selectedAnnonce ? (
               // Si une annonce est sélectionnée, afficher les détails de l'annonce à droite
