@@ -9,7 +9,7 @@ const Header = () => {
         <div className="mt-12">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#" tabindex="-1" aria-disabled="true"><NavLink to="/home">login</NavLink></a>
+                <NavLink className="nav-link" to="/home">login</NavLink>
             </li>
             {/*<li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#" tabindex="-1" aria-disabled="true"><NavLink to="/home">login</NavLink></a>
