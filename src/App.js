@@ -9,7 +9,7 @@ function App() {
     <Router>
       <div className='container mt-10'>
         <Routes>
-          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Login />} />
           <Route path='/home' element={<Home />} />
           {/* <Route path='/novalide' element={<MouvementsNonValides />} /> */}
         </Routes>

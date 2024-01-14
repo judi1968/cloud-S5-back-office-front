@@ -13,7 +13,7 @@ const Home = () => {
       {/* Ajoutez ici le reste de votre contenu */}
       <div className="mt-3">
         <h1>Contenu principal</h1>
-        <NavLink to="/login">login</NavLink>
+        <NavLink to="/">login</NavLink>
         {/* ... */}
       </div>
     </main>
