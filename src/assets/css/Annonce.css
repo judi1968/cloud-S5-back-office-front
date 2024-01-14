@@ -1,0 +1,30 @@
+/* Annonce.css */
+
+.annonce-card {
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body {
+    padding: 16px;
+  }
+  
+  .card-title {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+  }
+  
+  .card-text {
+    color: #555;
+    font-size: 0.9em;
+  }
+  
