@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     if (!accountService.isLogged) {
       // Rediriger vers la page d'accueil si le token est présent
-      navigate('/home');
+      navigate('/');
     }
   }, [navigate]);
   return (
