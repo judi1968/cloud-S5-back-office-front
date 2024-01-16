@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../assets/css/Login.css';
+import { accountService } from '../_services/account.service';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Login = () => {
         if (data.status === 200) {
           setLoginStatus('success');
           setLoginMessage(data.titre);
+          accountService.saveToken(data.token)
           navigate('/home'); // Redirection vers "/home"
         } else {
           setLoginStatus('failure');
