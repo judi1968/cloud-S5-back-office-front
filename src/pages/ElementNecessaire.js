@@ -4,7 +4,6 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import Header from '../components/Header';
 import './../assets/css/ElementNecessaire.css'
 import { useNavigate } from "react-router-dom"
-import { useEffect } from 'react';
 
 const ElementNecessaire = () => {
   const navigate = useNavigate();
