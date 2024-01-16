@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Modal, Form } from 'react-bootstrap';
 import Header from '../components/Header';
 import './../assets/css/ElementNecessaire.css'
+import { useNavigate } from "react-router-dom"
+import { useEffect } from 'react';
 
 const ElementNecessaire = () => {
+  const navigate = useNavigate();
+
+  // Effet secondaire pour vérifier la présence du token
+  useEffect(() => {
+    if (localStorage.getItem('token')==null) {
+      // Rediriger vers la page d'accueil si le token est présent
+      navigate('/');
+    }
+  }, [navigate]);
   const [elements, setElements] = useState([
     { id: 1, nom: 'Element 1' },
     { id: 2, nom: 'Element 2' },

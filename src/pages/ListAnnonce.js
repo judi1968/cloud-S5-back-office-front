@@ -6,8 +6,18 @@ import AnnonceDetail from '../components/AnnonceDetail';
 import './../assets/css/Home.css';
 import './../assets/css/statTables.css';
 import './../assets/css/ListAnnonce.css';
-
+import { useNavigate } from "react-router-dom"
+import { useEffect } from 'react';
 const ListAnnonce = () => {
+  const navigate = useNavigate();
+
+  // Effet secondaire pour vérifier la présence du token
+  useEffect(() => {
+    if (localStorage.getItem('token')==null) {
+      // Rediriger vers la page d'accueil si le token est présent
+      navigate('/');
+    }
+  }, [navigate]);
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const annoncesData = [
     {
