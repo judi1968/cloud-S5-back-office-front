@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Assurez-vous d'importer le CSS
 import Header from '../components/Header';
 import './../assets/css/Home.css'
 import './../assets/css/statTables.css'
-import { accountService } from '../_services/account.service';
+// import { accountService } from '../_services/account.service';
 
 const Home = () => {
   const navigate = useNavigate();
