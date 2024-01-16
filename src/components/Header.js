@@ -9,7 +9,7 @@ const Header = () => {
         <div className="mt-12">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <NavLink className="nav-link" to="/home">.Tableau statistique</NavLink>
+                <NavLink className="nav-link" to="/home">Tableau statistique</NavLink>
             </li>
             <li class="nav-item">
                 <NavLink className="nav-link" to="/list_annonce">Liste des annonces</NavLink>
