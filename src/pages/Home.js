@@ -12,7 +12,7 @@ const Home = () => {
 
   // Effet secondaire pour vérifier la présence du token
   useEffect(() => {
-    if (!accountService.isLogged) {
+    if (localStorage.getItem('token')==null) {
       // Rediriger vers la page d'accueil si le token est présent
       navigate('/');
     }
