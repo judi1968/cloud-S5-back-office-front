@@ -7,6 +7,7 @@ const Login = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState(null);
+  const [loginMessage, setLoginMessage] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,14 +22,24 @@ const Login = () => {
       });
 
       if (response.ok) {
-        setLoginStatus('success');
-        navigate('/home'); // Redirection vers "/home"
+        const data = await response.json();
+
+        if (data.status === 200) {
+          setLoginStatus('success');
+          setLoginMessage(data.titre);
+          navigate('/home'); // Redirection vers "/home"
+        } else {
+          setLoginStatus('failure');
+          setLoginMessage(data.titre);
+        }
       } else {
         setLoginStatus('failure');
+        setLoginMessage('Une erreur s\'est produite lors de la connexion.');
       }
     } catch (error) {
       console.error('Erreur lors de la demande au serveur:', error);
       setLoginStatus('failure');
+      setLoginMessage('Une erreur s\'est produite lors de la connexion.');
     }
   };
 
@@ -61,6 +72,7 @@ const Login = () => {
               </label>
               <center>
                 <button type="submit">{loginStatus === 'success' ? 'Connexion réussie' : loginStatus === 'failure' ? 'Connexion échouée' : 'Connecter'}</button>
+                {loginStatus === 'failure' && <p style={{ color: 'red' }}>{loginMessage}</p>}
               </center>
             </form>
           </div>
