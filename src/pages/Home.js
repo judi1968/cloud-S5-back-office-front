@@ -4,8 +4,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Assurez-vous d'importer le CSS
 import Header from '../components/Header';
 import './../assets/css/Home.css'
 import './../assets/css/statTables.css'
+import { accountService } from '../_services/account.service';
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  // Effet secondaire pour vérifier la présence du token
+  useEffect(() => {
+    if (!accountService.isLogged) {
+      // Rediriger vers la page d'accueil si le token est présent
+      navigate('/home');
+    }
+  }, [navigate]);
   return (
     <div className="container mt-12 grid-container">
       <header>
