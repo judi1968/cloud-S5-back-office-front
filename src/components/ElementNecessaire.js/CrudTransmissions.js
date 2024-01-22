@@ -86,10 +86,20 @@ const CrudTransmissions = () => {
     </div>
 
     <ul className="list-group mt-3">
+    <li className="list-group-item d-flex justify-content-between align-items-center">
+        <div className='w-75'>
+          <h3>Nom</h3>
+        </div>
+        <div className='w-25'>
+          <h3></h3>
+        </div>
+      </li>
       {elements && elements.object?.map((element) => (
         <li key={element.id} className="list-group-item d-flex justify-content-between align-items-center">
-          {element.nom}
-          <div>
+          <div className='w-75'>
+            {element.nom}
+          </div>
+          <div className='w-25'>
             <Button className='button-animation ' variant="info" onClick={() => handleEditClick(element)}>
               Modifier
             </Button>
