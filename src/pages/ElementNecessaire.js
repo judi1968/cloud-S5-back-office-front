@@ -22,7 +22,6 @@ const ElementNecessaire = () => {
   ]);
 
   const [elementNecessaire, setElementNecessaire] = useState();
-  const [loginMessage, setLoginMessage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,16 +38,11 @@ const ElementNecessaire = () => {
   
           if (data.status === 200) {
             setElementNecessaire(data.data);
-          } else {
-            setLoginMessage(data.titre);
           }
-        } else {
-          setLoginMessage('Une erreur s\'est produite lors de la connexion.');
         }
+        
       } catch (error) {
         console.error('Erreur lors de la demande au serveur:', error);
-        setLoginMessage('Une erreur s\'est produite lors de la connexion.');
-        console.log(loginMessage);
       }
     };
   
