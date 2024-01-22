@@ -59,42 +59,42 @@ const ElementNecessaire = () => {
   const [newElementName, setNewElementName] = useState('');
   const [selectedElement, setSelectedElement] = useState(null);
 
-  const handleAddClick = () => {
-    setShowAddModal(true);
-  };
+  // const handleAddClick = () => {
+  //   setShowAddModal(true);
+  // };
 
-  const handleEditClick = (element) => {
-    setSelectedElement(element);
-    setShowEditModal(true);
-  };
+  // const handleEditClick = (element) => {
+  //   setSelectedElement(element);
+  //   setShowEditModal(true);
+  // };
 
-  const handleDeleteClick = (element) => {
-    setSelectedElement(element);
-    setShowDeleteModal(true);
-  };
+  // const handleDeleteClick = (element) => {
+  //   setSelectedElement(element);
+  //   setShowDeleteModal(true);
+  // };
 
-  const handleAddElement = () => {
-    setElements([...elements, { id: elements.length + 1, nom: newElementName }]);
-    setNewElementName('');
-    setShowAddModal(false);
-  };
+  // const handleAddElement = () => {
+  //   setElements([...elements, { id: elements.length + 1, nom: newElementName }]);
+  //   setNewElementName('');
+  //   setShowAddModal(false);
+  // };
 
-  const handleEditElement = () => {
-    setElements(elements.map((element) => (element.id === selectedElement.id ? { ...element, nom: newElementName } : element)));
-    setNewElementName('');
-    setShowEditModal(false);
-  };
+  // const handleEditElement = () => {
+  //   setElements(elements.map((element) => (element.id === selectedElement.id ? { ...element, nom: newElementName } : element)));
+  //   setNewElementName('');
+  //   setShowEditModal(false);
+  // };
 
-  const handleDeleteElement = () => {
-    setElements(elements.filter((element) => element.id !== selectedElement.id));
-    setShowDeleteModal(false);
-  };
+  // const handleDeleteElement = () => {
+  //   setElements(elements.filter((element) => element.id !== selectedElement.id));
+  //   setShowDeleteModal(false);
+  // };
 
-  const handleCloseModals = () => {
-    setShowAddModal(false);
-    setShowEditModal(false);
-    setShowDeleteModal(false);
-  };
+  // const handleCloseModals = () => {
+  //   setShowAddModal(false);
+  //   setShowEditModal(false);
+  //   setShowDeleteModal(false);
+  // };
 
   return (
     <div className="container">
