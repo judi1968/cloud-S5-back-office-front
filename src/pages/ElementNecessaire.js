@@ -21,12 +21,12 @@ const ElementNecessaire = () => {
     // Ajoutez autant d'éléments que nécessaire
   ]);
 
-  const [elementNecessaire, setElementNecessaire] = useState();
+  const [elementNecessaire, setElementNecessaire] = useState({ data: [] });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
+        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/element_necessaire', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const ElementNecessaire = () => {
           const data = await response.json();
   
           if (data.status === 200) {
-            setElementNecessaire(data.data);
+            setElementNecessaire(data);
           }
         }
         
@@ -104,9 +104,9 @@ const ElementNecessaire = () => {
         <div className='row min-header'>
             <div className='col-6'>
                 <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                  {elementNecessaire.data?.map((element) => (
-                    <option value={element} key={element}>{element}</option>
-                  ))}
+                {elementNecessaire && elementNecessaire.data?.map((element) => (
+                  <option value={element} key={element}>{element}</option>
+                ))}
                 </select>
             </div>
             <div className='col-6'>
