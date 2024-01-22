@@ -97,7 +97,6 @@ const handleAddElement = async () => {
     }
   };
 
-  // Gérer la suppression d'une catégorie
   const handleDeleteElement = async () => {
     try {
       const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`, {
