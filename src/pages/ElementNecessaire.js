@@ -21,12 +21,6 @@ const ElementNecessaire = () => {
       navigate('/');
     }
   }, [navigate]);
-  const [elements, setElements] = useState([
-    { id: 1, nom: 'Element 1' },
-    { id: 2, nom: 'Element 2' },
-    // Ajoutez autant d'éléments que nécessaire
-  ]);
-
   const [elementNecessaire, setElementNecessaire] = useState({ data: [] });
 
   useEffect(() => {
