@@ -39,7 +39,6 @@ const ElementNecessaire = () => {
         if (data.status === 200) {
           setElementNecessaire(data.data);
         } else {
-          setLoginStatus('failure');
           setLoginMessage(data.titre);
         }
       } else {
