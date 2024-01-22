@@ -106,10 +106,9 @@ const ElementNecessaire = () => {
         <div className='row min-header'>
             <div className='col-6'>
                 <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option selected>Element</option>
-                    <option value="1">Marque</option>
-                    <option value="2">Caracteristique</option>
-                    <option value="3">Carburant</option>
+                  {elementNecessaire.data?.map((element) => (
+                    <option value={element} key={element}>{element}</option>
+                  ))}
                 </select>
             </div>
             <div className='col-6'>
