@@ -5,11 +5,31 @@ import './../../assets/css/ElementNecessaire.css'
 
 const CrudCategorie = () => {
 
-  const [elements, setElements] = useState([
-    { id: 1, nom: 'Element 1' },
-    { id: 2, nom: 'Element 2' },
-    // Ajoutez autant d'éléments que nécessaire
-  ]);
+  const [elements, setElements] = useState({data:[]});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data.object);
+            setElements(data);
+          }
+        
+      } catch (error) {
+        console.error('Erreur lors de la demande au serveur:', error);
+      }
+    };
+  
+    fetchData();
+  
+  }, []);
 
 
   const [showAddModal, setShowAddModal] = useState(false);
@@ -58,29 +78,32 @@ const CrudCategorie = () => {
 
   return (
     <div>
-    
-      <div className='col-6'>
-          <Button className='button-animation button-animation-green' variant="primary" onClick={handleAddClick}>
-              Ajouter
-          </Button>
-      </div>
 
-      <ul className="list-group mt-3">
-        {elements.map((element) => (
-          <li key={element.id} className="list-group-item d-flex justify-content-between align-items-center">
-            {element.nom}
-            <div>
-              <Button className='button-animation ' variant="info" onClick={() => handleEditClick(element)}>
-                Modifier
-              </Button>
-                <div><br></br></div>
-              <Button className='button-animation button-animation-red' variant="danger" onClick={() => handleDeleteClick(element)}>
-                Supprimer
-              </Button>
-            </div>
-          </li>
-        ))}
-      </ul>
+    <div className='col-6'>
+      <Button className='button-animation button-animation-green' variant="primary" onClick={handleAddClick}>
+        Ajouter
+      </Button>
+    </div>
+
+    <ul className="list-group mt-3">
+      {elements && elements.object?.map((element) => (
+        <li key={element.id} className="list-group-item d-flex justify-content-between align-items-center">
+          {element.nom}
+          <div>
+            {element.description}
+          </div>
+          <div>
+            <Button className='button-animation ' variant="info" onClick={() => handleEditClick(element)}>
+              Modifier
+            </Button>
+            <div><br></br></div>
+            <Button className='button-animation button-animation-red' variant="danger" onClick={() => handleDeleteClick(element)}>
+              Supprimer
+            </Button>
+          </div>
+        </li>
+      ))}
+    </ul>
 
       {/* Modal d'ajout */}
       <Modal show={showAddModal} onHide={handleCloseModals}>
