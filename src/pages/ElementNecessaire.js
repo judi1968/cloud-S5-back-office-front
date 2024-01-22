@@ -21,6 +21,37 @@ const ElementNecessaire = () => {
     // Ajoutez autant d'éléments que nécessaire
   ]);
 
+  const [elementNecessaire, setElementNecessaire] = useState();
+  useEffect(async () => {
+    
+    try {
+      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data.status === 200) {
+          setElementNecessaire(data.data)
+        } else {
+          setLoginStatus('failure');
+          setLoginMessage(data.titre);
+        }
+      } else {
+        setLoginStatus('failure');
+        setLoginMessage('Une erreur s\'est produite lors de la connexion.');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la demande au serveur:', error);
+      setLoginStatus('failure');
+      setLoginMessage('Une erreur s\'est produite lors de la connexion.');
+    }
+  });
+
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
