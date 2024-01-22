@@ -195,11 +195,11 @@ const handleAddElement = async () => {
           <Form>
             <Form.Group controlId="formElementName">
               <Form.Label>Nom de l'élément</Form.Label>
-              <Form.Control type="text" placeholder="Entrez le nom" value={newElementName} onChange={(e) => setNewElementName(e.target.value)} />
+              <Form.Control type="text" placeholder="Entrez le nom"  onChange={(e) => setNewElementName(e.target.value)} />
             </Form.Group>
             <Form.Group controlId="formElementName">
               <Form.Label>Description de l'élément</Form.Label>
-              <Form.Control type="text" placeholder="Entrez le nom" value={newElementDescription} onChange={(e) => setNewElementName(e.target.value)} />
+              <Form.Control type="text" placeholder="Entrez le description"  onChange={(e) => setNewElementDescription(e.target.value)} />
             </Form.Group>
           </Form>
         </Modal.Body>
