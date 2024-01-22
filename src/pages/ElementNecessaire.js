@@ -22,8 +22,9 @@ const ElementNecessaire = () => {
   ]);
 
   const [elementNecessaire, setElementNecessaire] = useState();
+  const [loginMessage, setLoginMessage] = useState('');
+
   useEffect(async () => {
-    
     try {
       const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
         method: 'GET',
@@ -36,21 +37,20 @@ const ElementNecessaire = () => {
         const data = await response.json();
 
         if (data.status === 200) {
-          setElementNecessaire(data.data)
+          setElementNecessaire(data.data);
         } else {
           setLoginStatus('failure');
           setLoginMessage(data.titre);
         }
       } else {
-        setLoginStatus('failure');
         setLoginMessage('Une erreur s\'est produite lors de la connexion.');
       }
     } catch (error) {
       console.error('Erreur lors de la demande au serveur:', error);
-      setLoginStatus('failure');
       setLoginMessage('Une erreur s\'est produite lors de la connexion.');
+      console.log(loginMessage);
     }
-  });
+  }, []);
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -59,42 +59,42 @@ const ElementNecessaire = () => {
   const [newElementName, setNewElementName] = useState('');
   const [selectedElement, setSelectedElement] = useState(null);
 
-  // const handleAddClick = () => {
-  //   setShowAddModal(true);
-  // };
+  const handleAddClick = () => {
+    setShowAddModal(true);
+  };
 
-  // const handleEditClick = (element) => {
-  //   setSelectedElement(element);
-  //   setShowEditModal(true);
-  // };
+  const handleEditClick = (element) => {
+    setSelectedElement(element);
+    setShowEditModal(true);
+  };
 
-  // const handleDeleteClick = (element) => {
-  //   setSelectedElement(element);
-  //   setShowDeleteModal(true);
-  // };
+  const handleDeleteClick = (element) => {
+    setSelectedElement(element);
+    setShowDeleteModal(true);
+  };
 
-  // const handleAddElement = () => {
-  //   setElements([...elements, { id: elements.length + 1, nom: newElementName }]);
-  //   setNewElementName('');
-  //   setShowAddModal(false);
-  // };
+  const handleAddElement = () => {
+    setElements([...elements, { id: elements.length + 1, nom: newElementName }]);
+    setNewElementName('');
+    setShowAddModal(false);
+  };
 
-  // const handleEditElement = () => {
-  //   setElements(elements.map((element) => (element.id === selectedElement.id ? { ...element, nom: newElementName } : element)));
-  //   setNewElementName('');
-  //   setShowEditModal(false);
-  // };
+  const handleEditElement = () => {
+    setElements(elements.map((element) => (element.id === selectedElement.id ? { ...element, nom: newElementName } : element)));
+    setNewElementName('');
+    setShowEditModal(false);
+  };
 
-  // const handleDeleteElement = () => {
-  //   setElements(elements.filter((element) => element.id !== selectedElement.id));
-  //   setShowDeleteModal(false);
-  // };
+  const handleDeleteElement = () => {
+    setElements(elements.filter((element) => element.id !== selectedElement.id));
+    setShowDeleteModal(false);
+  };
 
-  // const handleCloseModals = () => {
-  //   setShowAddModal(false);
-  //   setShowEditModal(false);
-  //   setShowDeleteModal(false);
-  // };
+  const handleCloseModals = () => {
+    setShowAddModal(false);
+    setShowEditModal(false);
+    setShowDeleteModal(false);
+  };
 
   return (
     <div className="container">
