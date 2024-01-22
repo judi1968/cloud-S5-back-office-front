@@ -24,31 +24,36 @@ const ElementNecessaire = () => {
   const [elementNecessaire, setElementNecessaire] = useState();
   const [loginMessage, setLoginMessage] = useState('');
 
-  useEffect(async () => {
-    try {
-      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-
-        if (data.status === 200) {
-          setElementNecessaire(data.data);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+  
+          if (data.status === 200) {
+            setElementNecessaire(data.data);
+          } else {
+            setLoginMessage(data.titre);
+          }
         } else {
-          setLoginMessage(data.titre);
+          setLoginMessage('Une erreur s\'est produite lors de la connexion.');
         }
-      } else {
+      } catch (error) {
+        console.error('Erreur lors de la demande au serveur:', error);
         setLoginMessage('Une erreur s\'est produite lors de la connexion.');
+        console.log(loginMessage);
       }
-    } catch (error) {
-      console.error('Erreur lors de la demande au serveur:', error);
-      setLoginMessage('Une erreur s\'est produite lors de la connexion.');
-      console.log(loginMessage);
-    }
+    };
+  
+    fetchData();
+  
   }, []);
 
   const [showAddModal, setShowAddModal] = useState(false);
