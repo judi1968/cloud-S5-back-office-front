@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Modal, Form } from 'react-bootstrap';
 import Header from '../components/Header';
 import './../assets/css/ElementNecessaire.css'
 import { useNavigate } from "react-router-dom"
+import CrudCategorie from '../components/ElementNecessaire.js/CrudCategorie';
+import CrudEquipementsInternes from '../components/ElementNecessaire.js/CrudEquipementsInternes';
+import CrudFreinage from '../components/ElementNecessaire.js/CrudFreinage';
+import CrudMarques from '../components/ElementNecessaire.js/CrudMarques';
+import CrudTransmissions from '../components/ElementNecessaire.js/CrudTransmissions';
+import CrudTypesCarburant from '../components/ElementNecessaire.js/CrudTypesCarburant';
+
 
 const ElementNecessaire = () => {
   const navigate = useNavigate();
@@ -50,50 +56,11 @@ const ElementNecessaire = () => {
   
   }, []);
 
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("categories");
 
-  const [newElementName, setNewElementName] = useState('');
-  const [selectedElement, setSelectedElement] = useState(null);
-
-  const handleAddClick = () => {
-    setShowAddModal(true);
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
   };
-
-  const handleEditClick = (element) => {
-    setSelectedElement(element);
-    setShowEditModal(true);
-  };
-
-  const handleDeleteClick = (element) => {
-    setSelectedElement(element);
-    setShowDeleteModal(true);
-  };
-
-  const handleAddElement = () => {
-    setElements([...elements, { id: elements.length + 1, nom: newElementName }]);
-    setNewElementName('');
-    setShowAddModal(false);
-  };
-
-  const handleEditElement = () => {
-    setElements(elements.map((element) => (element.id === selectedElement.id ? { ...element, nom: newElementName } : element)));
-    setNewElementName('');
-    setShowEditModal(false);
-  };
-
-  const handleDeleteElement = () => {
-    setElements(elements.filter((element) => element.id !== selectedElement.id));
-    setShowDeleteModal(false);
-  };
-
-  const handleCloseModals = () => {
-    setShowAddModal(false);
-    setShowEditModal(false);
-    setShowDeleteModal(false);
-  };
-
   return (
     <div className="container">
     <header>
@@ -103,100 +70,20 @@ const ElementNecessaire = () => {
       <h1>Elements Necessaires</h1>
         <div className='row min-header'>
             <div className='col-6'>
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onChange={handleCategoryChange}>
                 {elementNecessaire && elementNecessaire.data?.map((element) => (
                   <option value={element} key={element}>{element}</option>
                 ))}
                 </select>
             </div>
-            <div className='col-6'>
-                <Button className='button-animation button-animation-green' variant="primary" onClick={handleAddClick}>
-                    Ajouter
-                </Button>
-            </div>
         </div>
-
-      <ul className="list-group mt-3">
-        {elements.map((element) => (
-          <li key={element.id} className="list-group-item d-flex justify-content-between align-items-center">
-            {element.nom}
-            <div>
-              <Button className='button-animation ' variant="info" onClick={() => handleEditClick(element)}>
-                Modifier
-              </Button>
-                <div><br></br></div>
-              <Button className='button-animation button-animation-red' variant="danger" onClick={() => handleDeleteClick(element)}>
-                Supprimer
-              </Button>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      {/* Modal d'ajout */}
-      <Modal show={showAddModal} onHide={handleCloseModals}>
-        <Modal.Header closeButton>
-          <Modal.Title>Ajouter un élément nécessaire</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formElementName">
-              <Form.Label>Nom de l'élément</Form.Label>
-              <Form.Control type="text" placeholder="Entrez le nom" value={newElementName} onChange={(e) => setNewElementName(e.target.value)} />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button className='button-animation button-animation-grey' variant="secondary" onClick={handleCloseModals}>
-            Annuler
-          </Button>
-          <div><br></br></div>
-          <Button className='button-animation button-animation-green' variant="primary" onClick={handleAddElement}>
-            Ajouter
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* Modal de modification */}
-      <Modal show={showEditModal} onHide={handleCloseModals}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modifier l'élément nécessaire</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formElementName">
-              <Form.Label>Nouveau nom de l'élément</Form.Label>
-              <Form.Control type="text" placeholder="Entrez le nouveau nom" value={newElementName} onChange={(e) => setNewElementName(e.target.value)} />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button className='button-animation button-animation-grey' variant="secondary" onClick={handleCloseModals}>
-            Annuler
-          </Button>
-          <Button className='button-animation' variant="primary" onClick={handleEditElement}>
-            Modifier
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* Modal de suppression */}
-      <Modal show={showDeleteModal} onHide={handleCloseModals}>
-        <Modal.Header closeButton>
-          <Modal.Title>Supprimer l'élément nécessaire</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Êtes-vous sûr de vouloir supprimer l'élément "{selectedElement?.nom}" ?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button className='button-animation button-animation-grey' variant="secondary" onClick={handleCloseModals}>
-            Non
-          </Button>
-          <Button className='button-animation button-animation-red' variant="danger" onClick={handleDeleteElement}>
-            Oui
-          </Button>
-        </Modal.Footer>
-      </Modal>
+         {/* Affichage du composant correspondant */}
+         {selectedCategory === "categories" && <CrudCategorie />}
+        {selectedCategory === "marques" && <CrudMarques />}
+        {selectedCategory === "types-carburant" && <CrudTypesCarburant />}
+        {selectedCategory === "transmissions" && <CrudTransmissions />}
+        {selectedCategory === "freinages" && <CrudFreinage />}
+        {selectedCategory === "equipements-internes" && <CrudEquipementsInternes />}
       </div>
     </div>
   );
