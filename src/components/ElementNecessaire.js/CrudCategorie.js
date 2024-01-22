@@ -197,6 +197,10 @@ const handleAddElement = async () => {
               <Form.Label>Nom de l'élément</Form.Label>
               <Form.Control type="text" placeholder="Entrez le nom" value={newElementName} onChange={(e) => setNewElementName(e.target.value)} />
             </Form.Group>
+            <Form.Group controlId="formElementName">
+              <Form.Label>Description de l'élément</Form.Label>
+              <Form.Control type="text" placeholder="Entrez le nom" value={newElementDescription} onChange={(e) => setNewElementName(e.target.value)} />
+            </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
