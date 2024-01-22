@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Modal, Form } from 'react-bootstrap';
@@ -6,7 +7,17 @@ import './../../assets/css/ElementNecessaire.css'
 const CrudCategorie = () => {
 
   const [elements, setElements] = useState({data:[]});
+  const [selectedElementDescription, setSelectedElementDescription] = useState(null);
 
+  // State pour gérer l'ouverture/fermeture des modaux
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  // State pour gérer les valeurs des champs dans les modaux
+  const [newElementName, setNewElementName] = useState('');
+  const [newElementDescription, setNewElementDescription] = useState('');
+  const [selectedElement, setSelectedElement] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,13 +42,81 @@ const CrudCategorie = () => {
   
   }, []);
 
+// Gérer l'ajout d'une nouvelle catégorie
+const handleAddElement = async () => {
+    try {
+      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categorie', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nom: newElementName,
+          description: newElementDescription,
+        }),
+      });
 
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+      if (response.ok) {
+        const data = await response.json();
+        // eslint-disable-next-line no-undef
+        setCategories({ data: [...categories.data, data.object] });
+        setNewElementName('');
+        setNewElementDescription('');
+        setShowAddModal(false);
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de la catégorie:', error);
+    }
+  };
 
-  const [newElementName, setNewElementName] = useState('');
-  const [selectedElement, setSelectedElement] = useState(null);
+  // Gérer la modification d'une catégorie
+  const handleEditElement = async () => {
+    try {
+      const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nom: newElementName,
+          description: newElementDescription,
+        }),
+      });
+
+      if (response.ok) {
+        const updatedCategory = await response.json();
+        setCategories({
+          data: categories.data.map(category => (category.id === updatedCategory.object.id ? updatedCategory.object : category)),
+        });
+        setNewElementName('');
+        setNewElementDescription('');
+        setSelectedElement(null);
+        setShowEditModal(false);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la modification de la catégorie:', error);
+    }
+  };
+
+  // Gérer la suppression d'une catégorie
+  const handleDeleteElement = async () => {
+    try {
+      const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setCategories({ data: categories.data.filter(category => category.id !== selectedElement.id) });
+        setSelectedElement(null);
+        setShowDeleteModal(false);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression de la catégorie:', error);
+    }
+  };
+  
+
+
 
   const handleAddClick = () => {
     setShowAddModal(true);
@@ -53,22 +132,7 @@ const CrudCategorie = () => {
     setShowDeleteModal(true);
   };
 
-  const handleAddElement = () => {
-    setElements([...elements, { id: elements.length + 1, nom: newElementName }]);
-    setNewElementName('');
-    setShowAddModal(false);
-  };
-
-  const handleEditElement = () => {
-    setElements(elements.map((element) => (element.id === selectedElement.id ? { ...element, nom: newElementName } : element)));
-    setNewElementName('');
-    setShowEditModal(false);
-  };
-
-  const handleDeleteElement = () => {
-    setElements(elements.filter((element) => element.id !== selectedElement.id));
-    setShowDeleteModal(false);
-  };
+ 
 
   const handleCloseModals = () => {
     setShowAddModal(false);
@@ -152,6 +216,10 @@ const CrudCategorie = () => {
             <Form.Group controlId="formElementName">
               <Form.Label>Nouveau nom de l'élément</Form.Label>
               <Form.Control type="text" placeholder="Entrez le nouveau nom" value={newElementName} onChange={(e) => setNewElementName(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="formElementName">
+              <Form.Label>Nouveau description de l'élément</Form.Label>
+              <Form.Control type="text" placeholder="Entrez le nouveau description" value={newElementDescription} onChange={(e) => setNewElementDescription(e.target.value)} />
             </Form.Group>
           </Form>
         </Modal.Body>
