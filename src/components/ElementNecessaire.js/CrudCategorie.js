@@ -7,7 +7,6 @@ import './../../assets/css/ElementNecessaire.css'
 const CrudCategorie = () => {
 
   const [elements, setElements] = useState({data:[]});
-  const [selectedElementDescription, setSelectedElementDescription] = useState(null);
 
   // State pour gérer l'ouverture/fermeture des modaux
   const [showAddModal, setShowAddModal] = useState(false);
