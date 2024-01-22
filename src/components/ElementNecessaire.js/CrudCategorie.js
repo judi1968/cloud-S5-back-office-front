@@ -18,6 +18,12 @@ const CrudCategorie = () => {
   const [newElementDescription, setNewElementDescription] = useState('');
   const [selectedElement, setSelectedElement] = useState(null);
   useEffect(() => {
+    if (selectedElement) {
+      setNewElementName(selectedElement.nom || '');
+      setNewElementDescription(selectedElement.description || '');
+    }
+  }, [selectedElement]);
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
@@ -211,13 +217,23 @@ const handleAddElement = async () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="formElementName">
+          <Form.Group controlId="formElementName">
               <Form.Label>Nouveau nom de l'élément</Form.Label>
-              <Form.Control type="text" placeholder="Entrez le nouveau nom" value={newElementName} onChange={(e) => setNewElementName(e.target.value)} />
+              <Form.Control
+                type="text"
+                placeholder="Entrez le nouveau nom"
+                value={newElementName}
+                onChange={(e) => setNewElementName(e.target.value)}
+              />
             </Form.Group>
-            <Form.Group controlId="formElementName">
-              <Form.Label>Nouveau description de l'élément</Form.Label>
-              <Form.Control type="text" placeholder="Entrez le nouveau description" value={newElementDescription} onChange={(e) => setNewElementDescription(e.target.value)} />
+            <Form.Group controlId="formElementDescription">
+              <Form.Label>Nouvelle description de l'élément</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Entrez la nouvelle description"
+                value={newElementDescription}
+                onChange={(e) => setNewElementDescription(e.target.value)}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
