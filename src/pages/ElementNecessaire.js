@@ -40,6 +40,7 @@ const ElementNecessaire = () => {
           setElementNecessaire(data.data);
         } else {
           setLoginMessage(data.titre);
+          //
         }
       } else {
         setLoginMessage('Une erreur s\'est produite lors de la connexion.');
