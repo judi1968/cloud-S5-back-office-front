@@ -91,7 +91,7 @@ const CrudTypesCarburant = () => {
           <h3>Nom</h3>
         </div>
         <div className='w-25'>
-          <h3></h3>
+          <h3> </h3>
         </div>
       </li>
       {elements && elements.object?.map((element) => (
