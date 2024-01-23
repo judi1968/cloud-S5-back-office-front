@@ -111,7 +111,7 @@ const handleAddElement = async () => {
             'Content-Type': 'application/json',
           },
       });
-
+      console.log(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`);
       if (response.ok) {
         setCategories({ data: categories.data.filter(category => category.id !== selectedElement.id) });
         setSelectedElement(null);
