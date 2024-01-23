@@ -106,11 +106,9 @@ const handleAddElement = async () => {
   const handleDeleteElement = async () => {
     try {
       const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-          },
+        method: 'DELETE'
       });
+
       console.log(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`);
       if (response.ok) {
         setCategories({ data: categories.data.filter(category => category.id !== selectedElement.id) });
