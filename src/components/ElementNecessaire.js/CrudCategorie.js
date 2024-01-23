@@ -23,25 +23,25 @@ const CrudCategorie = () => {
       setNewElementDescription(selectedElement.description || '');
     }
   }, [selectedElement]);
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+          const data = await response.json();
+          console.log(data.object);
+          setElements(data);
+        }
+      
+    } catch (error) {
+      console.error('Erreur lors de la demande au serveur:', error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data.object);
-            setElements(data);
-          }
-        
-      } catch (error) {
-        console.error('Erreur lors de la demande au serveur:', error);
-      }
-    };
   
     fetchData();
   
@@ -62,11 +62,7 @@ const handleAddElement = async () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        // eslint-disable-next-line no-undef
-        setCategories({ data: [...categories.data, data.object] });
-        setNewElementName('');
-        setNewElementDescription('');
+        fetchData();        
         setShowAddModal(false);
       }
     } catch (error) {
@@ -89,10 +85,7 @@ const handleAddElement = async () => {
       });
 
       if (response.ok) {
-        const updatedCategory = await response.json();
-        setCategories({
-          data: categories.data.map(category => (category.id === updatedCategory.object.id ? updatedCategory.object : category)),
-        });
+        fetchData();        
         setNewElementName('');
         setNewElementDescription('');
         setSelectedElement(null);
@@ -111,7 +104,7 @@ const handleAddElement = async () => {
 
       console.log(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`);
       if (response.ok) {
-        setSelectedElement(null);
+        fetchData();        
         setShowDeleteModal(false);
       }
     } catch (error) {
