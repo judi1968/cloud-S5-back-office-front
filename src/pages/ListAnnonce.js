@@ -101,13 +101,13 @@ const ListAnnonce = () => {
                 <div className="col-md-8">
                   <AnnonceDetail annonce={selectedAnnonce} onFermerClick={handleFermerClick} />
                 </div>
-                <div className="col-md-4 mb-4">
+                <div className="col-md-4 mb-4 list-drop-down">
                   {renderAnnonceList(12)}
                 </div>
               </>
             ) : (
               // Si aucune annonce n'est sélectionnée, afficher simplement la liste des annonces
-              <div className="row d-flex flex-wrap col-12">
+              <div className="row d-flex flex-wrap col-12 ">
                 {renderAnnonceList(4)}
               </div>
             )}
