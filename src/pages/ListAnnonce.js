@@ -32,7 +32,7 @@ const ListAnnonce = () => {
   useEffect = () => {
     const fetchDataAnnonce = async (e) => {
       // e.preventDefault();
-  
+      
       try {
         const response = await fetch('https://cloud-s5-metier-production.up.railway.app/annonce_not_valides', {
           method: 'GET',
@@ -43,6 +43,7 @@ const ListAnnonce = () => {
   
         if (response.ok) {
           const data = await response.json();
+          console.log(data);
           if (data.status === 200) {
             setAnnonceData(data.annoces)
           }
