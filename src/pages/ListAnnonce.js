@@ -19,40 +19,35 @@ const ListAnnonce = () => {
     }
   }, [navigate]);
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
-  const annoncesData = [
-    {
-      id: 1,
-      date: '2024-03-15',
-      vendeur: 'John Doe',
-      marqueVoiture: 'Audi',
-      type: 'SUV',
-      prix: 35000,
-      commissionPropose: 2000,
-      description: 'Audi SUV en excellent état à vendre.',
-      
-    },
-    {
-      id: 2,
-      date: '2024-03-16',
-      vendeur: 'Jane Smith',
-      marqueVoiture: 'Mercedes',
-      type: 'Berline',
-      prix: 28000,
-      commissionPropose: 1500,
-      description: 'Mercedes Berline, faible kilométrage, à vendre.'
-    },
-    {
-      id: 3,
-      date: '2024-03-17',
-      vendeur: 'Bob Johnson',
-      marqueVoiture: 'Toyota',
-      type: 'Compacte',
-      prix: 18000,
-      commissionPropose: 1000,
-      description: 'Toyota Compacte en bon état, à vendre à un bon prix.'
-    },
-    // Ajoutez autant d'annonces que nécessaire
-  ];
+  const [annoncesData,setAnnonceData] = useState([]);
+
+  useEffect = () => {
+    const fetchDataAnnonce = async (e) => {
+      // e.preventDefault();
+  
+      try {
+        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/annonce_not_valides', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          if (data.status === 200) {
+            setAnnonceData(data.annoces)
+          }
+        } else {
+
+        }
+      } catch (error) {
+        console.error('Erreur lors de la demande au serveur:', error);
+
+      }
+    };
+    fetchDataAnnonce();
+  }
 
   const handleDetailClick = (annonce) => {
     setSelectedAnnonce(annonce);
@@ -62,18 +57,24 @@ const ListAnnonce = () => {
   };
   const renderAnnonceList = (nombre) => {
     return annoncesData.map((annonce) => (
-      <div key={annonce.id} className={`mb-${nombre} col-md-${nombre}`}>
-        <Annonce
-          titre={`Annonce ${annonce.id}`}
-          description={annonce.description}
-          date={annonce.date}
-          vendeur={annonce.vendeur}
-          marqueVoiture={annonce.marqueVoiture}
-          type={annonce.type}
-          prix={annonce.prix}
-          commissionPropose={annonce.commissionPropose}
-          onDetailClick={() => handleDetailClick(annonce)}
-        />
+      <div key={annonce.annonce.annonceId} className={`mb-${nombre} col-md-${nombre}`}>
+       <Annonce
+        annonceId={annonce.annonce.annonceId}
+        dateDebut={annonce.annonce.dateDebut}
+        couleur={annonce.catalogVoiture.couleur}
+        consommation={annonce.catalogVoiture.consommation}
+        categorieVoitureNom={annonce.catalogVoiture.categorieVoitureNom}
+        categorieVoitureDescription={annonce.catalogVoiture.categorieVoitureDescription}
+        marqueVoitureNom={annonce.catalogVoiture.marqueVoitureNom}
+        marqueVoitureDescription={annonce.catalogVoiture.marqueVoitureDescription}
+        marqueVoitureDateCreation={annonce.catalogVoiture.marqueVoitureDateCretion}
+        typeCarburantNom={annonce.catalogVoiture.typeCarburantNom}
+        transmissionVoitureNom={annonce.catalogVoiture.transmissionVoitureNom}
+        freinageVoitureNom={annonce.catalogVoiture.freignageVoitureNom}
+        prix={annonce.voiturePrix.prix}
+        onDetailClick={() => handleDetailClick(annonce.id)}
+      />
+
       </div>
     ));
   };
