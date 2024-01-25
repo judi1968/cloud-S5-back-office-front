@@ -10,7 +10,18 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from 'react';
 const ListAnnonce = () => {
   const navigate = useNavigate();
-
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const handleToggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+  
+  const handleDetailClick = (annonce) => {
+    console.log(annonce.annonce.id);
+    setSelectedAnnonce(annonce);
+  };
+  const handleFermerClick = () => {
+    setSelectedAnnonce(null);
+  };
   // Effet secondaire pour vérifier la présence du token
   useEffect(() => {
     if (localStorage.getItem('token')==null) {
@@ -49,12 +60,7 @@ const ListAnnonce = () => {
     fetchDataAnnonce();
   }
 
-  const handleDetailClick = (annonce) => {
-    setSelectedAnnonce(annonce);
-  };
-  const handleFermerClick = () => {
-    setSelectedAnnonce(null);
-  };
+
   const renderAnnonceList = (nombre) => {
     return annoncesData.map((annonce) => (
       <div key={annonce.annonce.annonceId} className={`mb-${nombre} col-md-${nombre}`}>
@@ -72,7 +78,7 @@ const ListAnnonce = () => {
         transmissionVoitureNom={annonce.catalogVoiture.transmissionVoitureNom}
         freinageVoitureNom={annonce.catalogVoiture.freignageVoitureNom}
         prix={annonce.voiturePrix.prix}
-        onDetailClick={() => handleDetailClick(annonce.id)}
+        onDetailClick={() => handleDetailClick(annonce)}
       />
 
       </div>
