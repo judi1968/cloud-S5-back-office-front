@@ -63,7 +63,7 @@ const ListAnnonce = () => {
 
   const renderAnnonceList = (nombre) => {
     return annoncesData.map((annonce) => (
-      <div key={annonce.annonce.annonceId} className={`mb-${nombre} col-md-${nombre}`}>
+      <div key={annonce.annonce.annonceId} className={`mb-${nombre} col-md-${nombre} annonce-card`}>
        <Annonce
         annonceId={annonce.annonce.annonceId}
         dateDebut={annonce.annonce.dateDebut}
