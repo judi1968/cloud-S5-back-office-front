@@ -10,10 +10,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from 'react';
 const ListAnnonce = () => {
   const navigate = useNavigate();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const handleToggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
-  };
+
   
   const handleDetailClick = (annonce) => {
     console.log(annonce.annonce.id);
