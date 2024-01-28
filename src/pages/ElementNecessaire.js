@@ -26,10 +26,11 @@ const ElementNecessaire = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/element_necessaire', {
+        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/elementNecessaire', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`,
           },
         });
   
@@ -38,11 +39,27 @@ const ElementNecessaire = () => {
   
           if (data.status === 200) {
             setElementNecessaire(data);
+          }else{
+            navigate('/error', {
+              state: {
+                errorStatus: response.status,
+                errorMessage: response.message,
+                errorTitle: response.title,
+              },
+            });
+
           }
         }
         
       } catch (error) {
         console.error('Erreur lors de la demande au serveur:', error);
+        navigate('/error', {
+          state: {
+            errorStatus: 404,
+            errorMessage: error,
+            errorTitle: `Erreur lors de la demande au serveur`,
+          },
+        });
       }
     };
   

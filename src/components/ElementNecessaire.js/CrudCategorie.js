@@ -29,16 +29,32 @@ const CrudCategorie = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
         },
       });
       if (response.ok) {
           const data = await response.json();
           console.log(data.object);
           setElements(data);
+        }else{
+          navigate('/error', {
+            state: {
+              errorStatus: response.status,
+              errorMessage: response.message,
+              errorTitle: response.title,
+            },
+          });
         }
       
     } catch (error) {
       console.error('Erreur lors de la demande au serveur:', error);
+      navigate('/error', {
+        state: {
+          errorStatus: 404,
+          errorMessage: error,
+          errorTitle: `Erreur lors de la demande au serveur`,
+        },
+      });
     }
   };
   useEffect(() => {
@@ -54,6 +70,7 @@ const handleAddElement = async () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
         },
         body: JSON.stringify({
           nom: newElementName,
@@ -64,9 +81,24 @@ const handleAddElement = async () => {
       if (response.ok) {
         fetchData();        
         setShowAddModal(false);
+      }else{
+        navigate('/error', {
+          state: {
+            errorStatus: response.status,
+            errorMessage: response.message,
+            errorTitle: response.title,
+          },
+        });
       }
     } catch (error) {
       console.error('Erreur lors de l\'ajout de la catégorie:', error);
+      navigate('/error', {
+        state: {
+          errorStatus: 404,
+          errorMessage: error,
+          errorTitle: `Erreur lors de la demande au serveur`,
+        },
+      });
     }
   };
 
@@ -77,6 +109,7 @@ const handleAddElement = async () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
         },
         body: JSON.stringify({
           nom: newElementName,
@@ -90,25 +123,59 @@ const handleAddElement = async () => {
         setNewElementDescription('');
         setSelectedElement(null);
         setShowEditModal(false);
+      }else{
+        navigate('/error', {
+          state: {
+            errorStatus: response.status,
+            errorMessage: response.message,
+            errorTitle: response.title,
+          },
+        });
       }
     } catch (error) {
       console.error('Erreur lors de la modification de la catégorie:', error);
+      navigate('/error', {
+        state: {
+          errorStatus: 404,
+          errorMessage: error,
+          errorTitle: `Erreur lors de la demande au serveur`,
+        },
+      });
     }
   };
 
   const handleDeleteElement = async () => {
     try {
       const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+        },
       });
 
       console.log(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`);
       if (response.ok) {
         fetchData();        
         setShowDeleteModal(false);
+      }else{
+        navigate('/error', {
+          state: {
+            errorStatus: response.status,
+            errorMessage: response.message,
+            errorTitle: response.title,
+          },
+        });
       }
     } catch (error) {
       console.error('Erreur lors de la suppression de la catégorie:', error);
+      navigate('/error', {
+        state: {
+          errorStatus: 404,
+          errorMessage: error,
+          errorTitle: `Erreur lors de la demande au serveur`,
+        },
+      });
     }
   };
   

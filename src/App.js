@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import ListAnnonce from './pages/ListAnnonce';
 import ElementNecessaire from './pages/ElementNecessaire';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/list_annonce' element={<ListAnnonce />} />
           <Route path='/element_necessaire' element={<ElementNecessaire />} />
+          <Route path='/error' element={<ErrorPage />} />
         </Routes>
       </div>
     </Router>
