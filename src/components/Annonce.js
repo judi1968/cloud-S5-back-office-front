@@ -16,6 +16,7 @@ const Annonce = ({
   freinageVoitureNom,
   prix,
   onDetailClick
+
 }) => {
   return (
     <div className="animated-annonce-card">
