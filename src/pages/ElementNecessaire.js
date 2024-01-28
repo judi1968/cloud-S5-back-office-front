@@ -65,7 +65,7 @@ const ElementNecessaire = () => {
   
     fetchData();
   
-  }, []);
+  });
 
   const [selectedCategory, setSelectedCategory] = useState("categories");
 
