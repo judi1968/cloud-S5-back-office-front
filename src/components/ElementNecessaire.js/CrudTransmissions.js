@@ -7,25 +7,26 @@ const CrudTransmissions = () => {
 
   const [elements, setElements] = useState({data:[]});
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/transmissions', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+        },
+      });
+      if (response.ok) {
+          const data = await response.json();
+          console.log(data.object);
+          setElements(data);
+        }
+      
+    } catch (error) {
+      console.error('Erreur lors de la demande au serveur:', error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/transmissions', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data.object);
-            setElements(data);
-          }
-        
-      } catch (error) {
-        console.error('Erreur lors de la demande au serveur:', error);
-      }
-    };
   
     fetchData();
   
@@ -38,38 +39,94 @@ const CrudTransmissions = () => {
 
   const [newElementName, setNewElementName] = useState('');
   const [selectedElement, setSelectedElement] = useState(null);
+// Gérer l'ajout d'une nouvelle catégorie
+const handleAddElement = async () => {
+  try {
+    const response = await fetch('https://cloud-s5-metier-production.up.railway.app/transmission', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+      },
+      body: JSON.stringify({
+        nom: newElementName,
+      }),
+    });
 
-  const handleAddClick = () => {
-    setShowAddModal(true);
-  };
+    if (response.ok) {
+      fetchData();        
+      setShowAddModal(false);
+    }else{
+      
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout de la catégorie:', error);
 
-  const handleEditClick = (element) => {
-    setSelectedElement(element);
-    setShowEditModal(true);
-  };
+  }
+};
 
-  const handleDeleteClick = (element) => {
-    setSelectedElement(element);
-    setShowDeleteModal(true);
-  };
+// Gérer la modification d'une catégorie
+const handleEditElement = async () => {
+  try {
+    const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/transmission/${selectedElement.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+      },
+      body: JSON.stringify({
+        nom: newElementName,
+      }),
+    });
 
-  const handleAddElement = () => {
-    setElements([...elements, { id: elements.length + 1, nom: newElementName }]);
-    setNewElementName('');
-    setShowAddModal(false);
-  };
+    if (response.ok) {
+      fetchData();        
+      setNewElementName('');
+      setSelectedElement(null);
+      setShowEditModal(false);
+    }else{
+      
+    }
+  } catch (error) {
+    console.error('Erreur lors de la modification de la catégorie:', error);
 
-  const handleEditElement = () => {
-    setElements(elements.map((element) => (element.id === selectedElement.id ? { ...element, nom: newElementName } : element)));
-    setNewElementName('');
-    setShowEditModal(false);
-  };
+  }
+};
 
-  const handleDeleteElement = () => {
-    setElements(elements.filter((element) => element.id !== selectedElement.id));
-    setShowDeleteModal(false);
-  };
+const handleDeleteElement = async () => {
+  try {
+    const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/transmission/${selectedElement.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+      },
+    });
 
+    if (response.ok) {
+      fetchData();        
+      setShowDeleteModal(false);
+    }else{
+      
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la catégorie:', error);
+
+  }
+};
+const handleAddClick = () => {
+  setShowAddModal(true);
+};
+
+const handleEditClick = (element) => {
+  setSelectedElement(element);
+  setShowEditModal(true);
+};
+
+const handleDeleteClick = (element) => {
+  setSelectedElement(element);
+  setShowDeleteModal(true);
+};
   const handleCloseModals = () => {
     setShowAddModal(false);
     setShowEditModal(false);

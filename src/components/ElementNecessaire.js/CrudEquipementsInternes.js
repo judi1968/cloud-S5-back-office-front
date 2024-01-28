@@ -1,35 +1,134 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Modal, Form } from 'react-bootstrap';
 import './../../assets/css/ElementNecessaire.css'
-
 const CrudEquipementsInternes = () => {
+  
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/equipements-internes', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+        },
+      });
+      if (response.ok) {
+          const data = await response.json();
+          console.log(data.object);
+          setElements(data);
+        }
+      
+    } catch (error) {
+      console.error('Erreur lors de la demande au serveur:', error);
+    }
+  };
 
   const [elements, setElements] = useState({data:[]});
 
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/equipements-internes', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data.object);
-            setElements(data);
-          }
-        
-      } catch (error) {
-        console.error('Erreur lors de la demande au serveur:', error);
-      }
-    };
-  
     fetchData();
   
   }, []);
+
+  
+// Gérer l'ajout d'une nouvelle catégorie
+const handleAddElement = async () => {
+  try {
+    const response = await fetch('https://cloud-s5-metier-production.up.railway.app/equipement-interne', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+      },
+      body: JSON.stringify({
+        nom: newElementName,
+      }),
+    });
+
+    if (response.ok) {
+      fetchData();        
+      setShowAddModal(false);
+    }else{
+      navigate('/error', {
+        state: {
+          errorStatus: response.status,
+          errorMessage: response.message,
+          errorTitle: response.title,
+        },
+      });
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout de la catégorie:', error);
+
+  }
+};
+
+// Gérer la modification d'une catégorie
+const handleEditElement = async () => {
+  try {
+    const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/equipement-interne/${selectedElement.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+      },
+      body: JSON.stringify({
+        nom: newElementName,
+      }),
+    });
+
+    if (response.ok) {
+      fetchData();        
+      setNewElementName('');
+      setNewElementDescription('');
+      setSelectedElement(null);
+      setShowEditModal(false);
+    }else{
+      navigate('/error', {
+        state: {
+          errorStatus: response.status,
+          errorMessage: response.message,
+          errorTitle: response.title,
+        },
+      });
+    }
+  } catch (error) {
+    console.error('Erreur lors de la modification de la catégorie:', error);
+
+  }
+};
+
+const handleDeleteElement = async () => {
+  try {
+    const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/equipement-interne/${selectedElement.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("tknidadmin")}`
+      },
+    });
+
+    if (response.ok) {
+      fetchData();        
+      setShowDeleteModal(false);
+    }else{
+      navigate('/error', {
+        state: {
+          errorStatus: response.status,
+          errorMessage: response.message,
+          errorTitle: response.title,
+        },
+      });
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la catégorie:', error);
+
+  }
+};
+
 
 
   const [showAddModal, setShowAddModal] = useState(false);
@@ -53,22 +152,7 @@ const CrudEquipementsInternes = () => {
     setShowDeleteModal(true);
   };
 
-  const handleAddElement = () => {
-    setElements([...elements, { id: elements.length + 1, nom: newElementName }]);
-    setNewElementName('');
-    setShowAddModal(false);
-  };
-
-  const handleEditElement = () => {
-    setElements(elements.map((element) => (element.id === selectedElement.id ? { ...element, nom: newElementName } : element)));
-    setNewElementName('');
-    setShowEditModal(false);
-  };
-
-  const handleDeleteElement = () => {
-    setElements(elements.filter((element) => element.id !== selectedElement.id));
-    setShowDeleteModal(false);
-  };
+  
 
   const handleCloseModals = () => {
     setShowAddModal(false);
