@@ -20,7 +20,6 @@ const Annonce = ({
   onDetailClick
 
 }) => {
-  const navigate = useNavigate();
 
   const [isValide,setIsValide] = useState(false)
 
