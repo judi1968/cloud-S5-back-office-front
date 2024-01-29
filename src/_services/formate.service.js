@@ -32,3 +32,27 @@ export function formaterPrix(nombre) {
     }
 }
 
+export function getNomMois(numeroMois) {
+    const mois = [
+      'Jan',
+      'Fev',
+      'Mar',
+      'Avr',
+      'Mai',
+      'Juin',
+      'Juil',
+      'Août',
+      'Sept',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
+  
+    // Vérifie si le numéro de mois est valide
+    if (numeroMois >= 1 && numeroMois <= 12) {
+      return mois[numeroMois - 1];
+    } else {
+      return 'Mois invalide';
+    }
+  }
+
