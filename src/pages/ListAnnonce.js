@@ -20,46 +20,41 @@ const ListAnnonce = () => {
     setSelectedAnnonce(null);
   };
   // Effet secondaire pour vérifier la présence du token
-  useEffect(() => {
-    if (localStorage.getItem('token')==null) {
-      // Rediriger vers la page d'accueil si le token est présent
-      navigate('/');
-    }
-  }, [navigate]);
+
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const [annoncesData,setAnnonceData] = useState([]);
   const [dataIsFetched,setDataIsFethed] = useState(false);
 
-  useEffect = () => {
-    const fetchDataAnnonce = async (e) => {
-      // e.preventDefault();
-      
-      try {
-        const response = await fetch('https://cloud-s5-metier-production.up.railway.app/annonce_not_valides', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization':`Bearer ${localStorage.getItem("tknidadmin")}`
-          },
-        });
-  
-        if (response.ok) {
-          const data = await response.json();
-          if (data.status === 200) {
-            setAnnonceData(data.annoces)
-          }
-        } else {
+  const fetchDataAnnonce = async (e) => {
+    if (!dataIsFetched) {
+    // e.preventDefault();
+    
+    try {
+      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/annonce_not_valides', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':`Bearer ${localStorage.getItem("tknidadmin")}`
+        },
+      });
 
+      if (response.ok) {
+        const data = await response.json();
+        if (data.status === 200) {
+          setAnnonceData(data.annoces)
         }
-      } catch (error) {
-        console.error('Erreur lors de la demande au serveur:', error);
+      } else {
 
       }
-    };
-    if (!dataIsFetched) {
-      fetchDataAnnonce();
+    } catch (error) {
+      console.error('Erreur lors de la demande au serveur:', error);
+
+    }
       setDataIsFethed(true);
     }
+  };
+  useEffect = () => {
+    fetchDataAnnonce();
   }
 
   const renderAnnonceList = (nombre) => {
