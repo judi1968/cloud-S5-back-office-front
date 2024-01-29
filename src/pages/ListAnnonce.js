@@ -104,7 +104,6 @@ const ListAnnonce = () => {
           <div class="row">
             <button  class="btn-action-list btn btn-primary" onClick={handlePasValiderClick}>En attente de validation</button>
             <button  class="btn-action-list btn btn-primary" onClick={handleValiderClick}>Deja valider </button>
-            <button  class="btn-action-list btn btn-primary" onClick={handleValiderClick}>Vendu </button>
           </div>
           <br></br>
           <div className='row'>
