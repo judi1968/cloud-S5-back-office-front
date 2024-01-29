@@ -62,24 +62,22 @@ const ListAnnonce = () => {
     }
   }
 
-
   const renderAnnonceList = (nombre) => {
     return annoncesData.map((annonce) => (
       <div key={annonce.annonce.annonceId} className={`mb-${nombre} col-md-${nombre} annonce-card`}>
        <Annonce
         annonceId={annonce.annonce.annonceId}
         dateDebut={annonce.annonce.dateDebut}
-        couleur={annonce.catalogVoiture.couleur}
         consommation={annonce.catalogVoiture.consommation}
         categorieVoitureNom={annonce.catalogVoiture.categorieVoitureNom}
-        categorieVoitureDescription={annonce.catalogVoiture.categorieVoitureDescription}
         marqueVoitureNom={annonce.catalogVoiture.marqueVoitureNom}
-        marqueVoitureDescription={annonce.catalogVoiture.marqueVoitureDescription}
-        marqueVoitureDateCreation={annonce.catalogVoiture.marqueVoitureDateCretion}
         typeCarburantNom={annonce.catalogVoiture.typeCarburantNom}
         transmissionVoitureNom={annonce.catalogVoiture.transmissionVoitureNom}
         freinageVoitureNom={annonce.catalogVoiture.freignageVoitureNom}
         prix={annonce.voiturePrix.prix}
+        commission={annonce.annonce.commission}
+        nomAuteur={annonce.personneClient.nom}
+        prenomAuteur={annonce.personneClient.prenom}
         onDetailClick={() => handleDetailClick(annonce)}
       />
 
