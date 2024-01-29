@@ -234,7 +234,7 @@ const Home = () => {
               <div className='col-md-3'>
               </div>
               <div className='col-md-3'>
-                <input placeholder='Entrer un annee' onChange={handleChangeVente}></input>
+                <input placeholder='Entrer une annee' onChange={handleChangeVente}></input>
               </div>
             </div>
               <BarChartAnnonce data={venteData} />
@@ -252,7 +252,7 @@ const Home = () => {
               <div className='col-md-3'>
               </div>
               <div className='col-md-3'>
-                <input placeholder='Entrer un annee' onChange={handleChangeUsers}></input>
+                <input placeholder='Entrer une annee' onChange={handleChangeUsers}></input>
               </div>
             </div>
               <BarChartAnnonce data={usersData} />

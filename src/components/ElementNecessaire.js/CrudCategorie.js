@@ -155,7 +155,6 @@ const handleAddElement = async () => {
         },
       });
 
-      console.log(`https://cloud-s5-metier-production.up.railway.app/categorie/${selectedElement.id}`);
       if (response.ok) {
         fetchData();        
         setShowDeleteModal(false);

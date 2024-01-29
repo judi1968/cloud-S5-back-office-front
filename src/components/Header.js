@@ -9,7 +9,7 @@ const Header = () => {
     // Fonction de déconnexion
     const handleLogout = () => {
       // Supprimer le token du localStorage
-      localStorage.removeItem('token');
+      localStorage.removeItem('tknidadmin');
       // Rediriger vers la page de connexion
       navigate('/');
     };
