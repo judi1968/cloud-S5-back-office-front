@@ -15,7 +15,7 @@ const AnnonceDetail = ({ annonce, onFermerClick }) => {
       <h2>Détails de l'annonce</h2>
       <div className="card">
         <div className="card-body">
-          <h5 className="card-title">{`Annonce ${annonce.annonce.annonceId}`}</h5>
+          <h5 className="card-title">{`Annonce ${annonce.catalogVoiture.marqueVoitureNom}`}</h5>
           <p className="card-text">{annonce.personneClient.nom} {annonce.personneClient.prenom} | {formaterDate(annonce.annonce.dateDebut)}</p>
           <ul className="list-group list-group-flush">
             <li className="list-group-item"><strong>Couleur : </strong> <span style={{ background: `#${annonce.catalogVoiture.couleur}` , color: `rgba(0,0,0,0)`}}> ...................</span> </li>
