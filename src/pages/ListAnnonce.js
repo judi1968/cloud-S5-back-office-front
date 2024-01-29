@@ -6,10 +6,8 @@ import AnnonceDetail from '../components/AnnonceDetail';
 import './../assets/css/Home.css';
 import './../assets/css/statTables.css';
 import './../assets/css/ListAnnonce.css';
-import { useNavigate } from "react-router-dom"
 import { useEffect } from 'react';
 const ListAnnonce = () => {
-  const navigate = useNavigate();
 
   
   const handleDetailClick = (annonce) => {
@@ -19,47 +17,46 @@ const ListAnnonce = () => {
   const handleFermerClick = () => {
     setSelectedAnnonce(null);
   };
-  // Effet secondaire pour vérifier la présence du token
 
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const [annoncesData,setAnnonceData] = useState([]);
-  const [dataIsFetched,setDataIsFethed] = useState(false);
+  const [dataIsFetched,setDataIsFethed] = useState(false)
 
-  const fetchDataAnnonce = async (e) => {
-    if (!dataIsFetched) {
-    // e.preventDefault();
-    
-    try {
-      const response = await fetch('https://cloud-s5-metier-production.up.railway.app/annonce_not_valides', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization':`Bearer ${localStorage.getItem("tknidadmin")}`
-        },
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.status === 200) {
-          setAnnonceData(data.annoces)
+    const fetchDataAnnonce = async () => {
+      if (!dataIsFetched) {
+  
+        try {
+          const response = await fetch('https://cloud-s5-metier-production.up.railway.app/annonce_not_valides', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization':`Bearer ${localStorage.getItem("tknidadmin")}`
+            },
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            if (data.status === 200) {
+              setAnnonceData(data.annoces)
+            }
+          } else {
+            
+          }
+        } catch (error) {
+          console.error('Erreur lors de la demande au serveur:', error);
+          
         }
-      } else {
-
       }
-    } catch (error) {
-      console.error('Erreur lors de la demande au serveur:', error);
-
-    }
-      setDataIsFethed(true);
-    }
-  };
-  useEffect = () => {
-    fetchDataAnnonce();
-  }
-
-  const renderAnnonceList = (nombre) => {
-    return annoncesData.map((annonce) => (
-      <div key={annonce.annonce.annonceId} className={`mb-${nombre} col-md-${nombre} annonce-card`}>
+      setDataIsFethed(true)
+      }
+      useEffect (() => {
+      fetchDataAnnonce();
+    });
+    
+    const renderAnnonceList = (nombre) => {
+      return annoncesData.map((annonce) => (
+        <div key={annonce.annonce.annonceId} className={`mb-${nombre} col-md-${nombre} annonce-card`}>
        <Annonce
         annonceId={annonce.annonce.annonceId}
         dateDebut={annonce.annonce.dateDebut}
