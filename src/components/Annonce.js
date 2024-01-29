@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../assets/css/Annonce.css';
 import { formaterDate, formaterPrix } from '../_services/formate.service';
-import { useNavigate } from 'react-router-dom';
 const Annonce = ({
   annonceId,
   dateDebut,
