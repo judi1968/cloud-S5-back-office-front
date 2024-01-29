@@ -13,7 +13,8 @@ import CrudTypesCarburant from '../components/ElementNecessaire.js/CrudTypesCarb
 
 const ElementNecessaire = () => {
   const navigate = useNavigate();
-
+  const [dataIsFetched,setDataIsFethed] = useState(false)
+  
   // Effet secondaire pour vérifier la présence du token
   useEffect(() => {
     if (localStorage.getItem('token')==null) {
@@ -22,6 +23,7 @@ const ElementNecessaire = () => {
     }
   }, [navigate]);
   const [elementNecessaire, setElementNecessaire] = useState({ data: [] });
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,8 +64,11 @@ const ElementNecessaire = () => {
         });
       }
     };
-  
-    fetchData();
+    if (!dataIsFetched) {
+      fetchData();
+      setDataIsFethed(true);
+    }
+    
   
   });
 

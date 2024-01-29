@@ -5,8 +5,8 @@ import { accountService } from '../_services/account.service';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('vaikanet@admin.mg');
+  const [password, setPassword] = useState('vaikanet');
   const [loginStatus, setLoginStatus] = useState(null);
   const [loginMessage, setLoginMessage] = useState('');
   const [loading, setLoading] = useState(false);

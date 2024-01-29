@@ -28,6 +28,7 @@ const ListAnnonce = () => {
   }, [navigate]);
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const [annoncesData,setAnnonceData] = useState([]);
+  const [dataIsFetched,setDataIsFethed] = useState(false);
 
   useEffect = () => {
     const fetchDataAnnonce = async (e) => {
@@ -44,7 +45,6 @@ const ListAnnonce = () => {
   
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           if (data.status === 200) {
             setAnnonceData(data.annoces)
           }
@@ -56,7 +56,10 @@ const ListAnnonce = () => {
 
       }
     };
-    fetchDataAnnonce();
+    if (!dataIsFetched) {
+      fetchDataAnnonce();
+      setDataIsFethed(true);
+    }
   }
 
 

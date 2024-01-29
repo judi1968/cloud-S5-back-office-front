@@ -23,6 +23,7 @@ const CrudCategorie = () => {
       setNewElementDescription(selectedElement.description || '');
     }
   }, [selectedElement]);
+  
   const fetchData = async () => {
     try {
       const response = await fetch('https://cloud-s5-metier-production.up.railway.app/categories', {
