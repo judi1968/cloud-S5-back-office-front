@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../assets/css/Annonce.css';
 import { formaterDate, formaterPrix } from '../_services/formate.service';
+import { useNavigate } from 'react-router-dom';
 const Annonce = ({
   annonceId,
   dateDebut,
@@ -15,9 +16,14 @@ const Annonce = ({
   commission,
   nomAuteur,
   prenomAuteur,
+  dateValidation,
   onDetailClick
 
 }) => {
+  const navigate = useNavigate();
+
+  const [isValide,setIsValide] = useState(false)
+
   return (
     <div className="animated-annonce-card">
       <div className="card">
@@ -36,6 +42,34 @@ const Annonce = ({
           <button className="btn btn-primary mt-3" onClick={() => onDetailClick(annonceId)}>
             Voir le détail
           </button>
+          {dateValidation === null && !isValide ? (
+            <button className="btn btn-success mt-3" onClick={ async () => {
+              try {
+                const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/annonce_valide`, {
+                  method: 'post',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization':`Bearer ${localStorage.getItem("tknidadmin")}`
+                  },
+                  body: JSON.stringify({ id_annonce: annonceId }),
+                });
+                
+                if (response.ok) {
+                  const data = await response.json();
+                  if (data.status === 200) {
+                    setIsValide(true)
+                    }
+                  } else {
+                    }
+                  } catch (error) {
+                console.error('Erreur lors de la demande au serveur:', error);
+              
+              }
+
+            }}>
+              Je valide
+            </button>
+          ) : null}
         </div>
       </div>
     </div>

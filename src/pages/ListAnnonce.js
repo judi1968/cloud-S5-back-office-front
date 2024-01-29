@@ -83,6 +83,7 @@ const ListAnnonce = () => {
         commission={annonce.annonce.commission}
         nomAuteur={annonce.personneClient.nom}
         prenomAuteur={annonce.personneClient.prenom}
+        dateValidation={annonce.annonceValidee.dateValidation}
         onDetailClick={() => handleDetailClick(annonce)}
       />
 
