@@ -21,13 +21,15 @@ const ListAnnonce = () => {
   const [selectedAnnonce, setSelectedAnnonce] = useState(null);
   const [annoncesData,setAnnonceData] = useState([]);
   const [dataIsFetched,setDataIsFethed] = useState(false)
+  const [urlAnnonce,setUrlAnnonce] = useState('annonce_not_valides')
 
 
     const fetchDataAnnonce = async () => {
       if (!dataIsFetched) {
+        console.log("yes");
   
         try {
-          const response = await fetch('https://cloud-s5-metier-production.up.railway.app/annonce_not_valides', {
+          const response = await fetch(`https://cloud-s5-metier-production.up.railway.app/${urlAnnonce}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -53,6 +55,17 @@ const ListAnnonce = () => {
       useEffect (() => {
       fetchDataAnnonce();
     });
+
+    const handleValiderClick = () => {
+      setUrlAnnonce('annonce_valides');
+      setDataIsFethed(false); 
+    };
+
+    const handlePasValiderClick = () => {
+      setUrlAnnonce('annonce_not_valides');
+      setDataIsFethed(false); 
+    };
+    
     
     const renderAnnonceList = (nombre) => {
       return annoncesData.map((annonce) => (
@@ -88,9 +101,9 @@ const ListAnnonce = () => {
         <div className="container mt-12 table-container">
           <h1>Liste des annonces de vente de voitures</h1>
           <div class="row">
-            <button  class="btn-action-list btn btn-primary">En attente de validation</button>
-            <button  class="btn-action-list btn btn-primary">Deja valider </button>
-            <button  class="btn-action-list btn btn-primary">Tout les annonces</button>
+            <button  class="btn-action-list btn btn-primary" onClick={handlePasValiderClick}>En attente de validation</button>
+            <button  class="btn-action-list btn btn-primary" onClick={handleValiderClick}>Deja valider </button>
+            <button  class="btn-action-list btn btn-primary" onClick={handleValiderClick}>Vendu </button>
           </div>
           <br></br>
           <div className='row'>
