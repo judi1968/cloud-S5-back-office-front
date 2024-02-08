@@ -28,7 +28,7 @@ const AnnonceDetail = ({ annonce, onFermerClick }) => {
             <li className="list-group-item"><strong>Transmission :</strong> {annonce.catalogVoiture.transmissionVoitureNom}</li>
             <li className="list-group-item"><strong>Freinage :</strong> {annonce.catalogVoiture.freignageVoitureNom}</li>
             <li className="list-group-item"><strong>Prix :</strong> {formaterPrix(annonce.voiturePrix.prix)}</li>
-            <li className="list-group-item"><strong>Prix :</strong> {formaterPrix(annonce.annonce.commission)}</li>
+            <li className="list-group-item"><strong>Commission:</strong> {formaterPrix(annonce.annonce.commission)}</li>
           </ul>
           <button className="btn btn-ferme mt-3" onClick={onFermerClick}>
             Fermer
